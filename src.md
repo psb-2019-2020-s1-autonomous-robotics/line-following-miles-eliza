@@ -19,16 +19,17 @@ sensor = ColorSensor(Port.S2)
 
 robot = DriveBase(motor, motor2, 56, 114)
 
-n = 1
+n = 2
 
 def scan(n):
+    global dir
     while (sensor.reflection() > 17):
-        robot.drive_time(0, 5*n, 5000)
+        robot.drive_time(0, 3*n, 250*n)
         n += 1
         wait(250)
         if (sensor.reflection() <= 17):
             break
-        robot.drive_time(0, -5*n, 5000)
+        robot.drive_time(0, -3*n, 250*n)
         n += 1
         wait(250)
         if (sensor.reflection() <= 17):
@@ -42,4 +43,5 @@ while True:
         motor.stop(Stop.BRAKE)
         motor2.stop(Stop.BRAKE)
         scan(n)
+
 
